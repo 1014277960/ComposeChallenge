@@ -1,16 +1,31 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -34,7 +49,7 @@ import com.example.androiddevchallenge.model.Dog
 @Composable
 fun DogList(dogList: List<Dog>, clickListener: (Dog) -> Unit) {
     LazyColumn {
-        items(dogList) {dog ->
+        items(dogList) { dog ->
             DogItem(
                 dog = dog,
                 modifier = Modifier.clickable {
@@ -47,14 +62,19 @@ fun DogList(dogList: List<Dog>, clickListener: (Dog) -> Unit) {
 
 @Composable
 fun DogItem(dog: Dog, modifier: Modifier) {
-    Card(elevation = 10.dp, modifier = modifier
-        .height(120.dp)
-        .fillMaxWidth()) {
+    Card(
+        elevation = 10.dp,
+        modifier = modifier
+            .height(120.dp)
+            .fillMaxWidth()
+    ) {
         Row(
             Modifier
                 .padding(10.dp)
-                .background(Color.White)) {
-            Image(painter = painterResource(id = dog.picture),
+                .background(Color.White)
+        ) {
+            Image(
+                painter = painterResource(id = dog.picture),
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
@@ -63,7 +83,7 @@ fun DogItem(dog: Dog, modifier: Modifier) {
                     .clip(shape = CircleShape)
                     .border(width = 2.dp, color = Color.White, shape = RoundedCornerShape(50))
             )
-            Column(Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp, )) {
+            Column(Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp,)) {
                 Text(text = dog.name, style = MaterialTheme.typography.h4)
                 Text(text = "${calculateAge(dog.age)}")
                 Text(text = dog.address)
@@ -97,9 +117,12 @@ fun DogDetail(dog: Dog, adoptListener: (Dog) -> Unit) {
         Text(text = "PhoneNumber: ${dog.phoneNumber}", Modifier.padding(5.dp))
         Text(text = "${dog.desc}", Modifier.padding(5.dp))
 
-        Button(onClick = {
-            adoptListener.invoke(dog)
-        }, Modifier.padding(5.dp)) {
+        Button(
+            onClick = {
+                adoptListener.invoke(dog)
+            },
+            Modifier.padding(5.dp)
+        ) {
             Text(text = "Adopt ${dog.name}")
         }
     }

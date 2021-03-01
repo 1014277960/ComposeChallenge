@@ -22,7 +22,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androiddevchallenge.model.DataSourceViewModel
 import com.example.androiddevchallenge.ui.DogDetail
 import com.example.androiddevchallenge.ui.DogList
@@ -38,11 +37,14 @@ class MainActivity : AppCompatActivity() {
             MyTheme {
                 val dogList by model.dogList.observeAsState()
                 val currentDog by model.currentDog.observeAsState()
-                DogList(dogList = dogList!!, clickListener = {
-                    model.showDetail(it)
-                })
+                DogList(
+                    dogList = dogList!!,
+                    clickListener = {
+                        model.showDetail(it)
+                    }
+                )
                 if (currentDog != null) {
-                    DogDetail(dog = currentDog!!) {dog ->
+                    DogDetail(dog = currentDog!!) { dog ->
                         Toast.makeText(this, "Adopt ${dog.name} success!!", Toast.LENGTH_SHORT).show()
                     }
                 }
